@@ -14,7 +14,7 @@ RUN npm run build
 FROM node:20-alpine AS backend-build
 
 WORKDIR /app/backend
-COPY server/package*.json ./
+COPY backend/package*.json ./
 RUN npm install
 COPY backend/ ./
 RUN npm run build
@@ -22,7 +22,7 @@ FROM node:20-alpine AS complete
 WORKDIR /app
 COPY --from=backend-build /app/backend/dist ./backend/dist
 COPY --from=backend-build /app/backend/node_modules ./backend/node_modules
-COPY --from=backend-build /app/backend/package*.json ./server/
+COPY --from=backend-build /app/backend/package*.json ./backend/
 COPY --from=frontend-build /app/frontend/dist ./backend/dist/public
 ENV NODE_ENV=production
 WORKDIR /app/backend
