@@ -8,8 +8,6 @@ interface Props {
   isStreaming?: boolean;
 }
 
-/* ---------------- SIMPLE RENDER ---------------- */
-
 function renderContent(content: string) {
   return content.split("\n").map((line, i) => {
     const key = `${i}-${line}`;
@@ -38,8 +36,6 @@ function renderContent(content: string) {
   });
 }
 
-/* ---------------- COMPONENT ---------------- */
-
 export default function MessageBubble({ message, isStreaming }: Props) {
   const isAssistant = message.role === "assistant";
 
@@ -66,7 +62,7 @@ export default function MessageBubble({ message, isStreaming }: Props) {
           !isAssistant && "flex flex-col items-end",
         )}
       >
-        {/* BUBBLE */}
+        {" "}
         <div
           className={clsx(
             "px-3 sm:px-4 py-2.5 rounded-2xl text-sm leading-relaxed shadow-sm border",
@@ -84,14 +80,10 @@ export default function MessageBubble({ message, isStreaming }: Props) {
           ) : (
             <p className="whitespace-pre-wrap">{message.content}</p>
           )}
-
-          {/* STREAMING CURSOR */}
           {isStreaming && (
             <span className="inline-block w-2 h-4 ml-1 bg-blue-400 rounded-sm animate-pulse" />
           )}
         </div>
-
-        {/* ESCALATION BADGE */}
         {isEscalated && (
           <div className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20">
             <AlertTriangle className="w-3 h-3 text-amber-400" />
@@ -101,7 +93,6 @@ export default function MessageBubble({ message, isStreaming }: Props) {
             </span>
           </div>
         )}
-
         {/* TIMESTAMP */}
         {"createdAt" in message && !isStreaming && (
           <p
@@ -116,8 +107,6 @@ export default function MessageBubble({ message, isStreaming }: Props) {
           </p>
         )}
       </div>
-
-      {/* USER AVATAR */}
       {!isAssistant && (
         <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gray-800 border border-gray-700 flex items-center justify-center flex-shrink-0 mt-0.5">
           <User className="w-4 h-4 text-gray-300" />

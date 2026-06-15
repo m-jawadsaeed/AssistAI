@@ -22,21 +22,15 @@ export default function ChatWindow() {
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
   useMessages(activeConversationId);
-
-  /* ---------------- STABLE MESSAGES ---------------- */
   const currentMessages = useMemo(() => {
     if (!activeConversationId) return [];
     return messages[activeConversationId] ?? [];
   }, [activeConversationId, messages]);
-
-  /* ---------------- AUTO SCROLL ---------------- */
   useEffect(() => {
     bottomRef.current?.scrollIntoView({
       behavior: "smooth",
     });
   }, [currentMessages.length, streamingMessage]);
-
-  /* ---------------- EMPTY STATE ---------------- */
   if (!activeConversationId) {
     return (
       <div className="h-full bg-gray-950 text-white flex items-center justify-center px-4">
@@ -48,15 +42,13 @@ export default function ChatWindow() {
 
           {/* TITLE */}
           <h2 className="text-xl sm:text-2xl font-semibold mb-2">
-            Hi, I’m Alex
+            Hi, I’m AssistAI!
           </h2>
 
           <p className="text-gray-400 text-sm leading-relaxed mb-6">
-            Your AI support assistant for FAQs, account help, orders, billing,
-            and general queries.
+            Your assistant for FAQs, account settings, step workspace.
           </p>
 
-          {/* FEATURES */}
           <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6">
             {[
               {
@@ -85,8 +77,7 @@ export default function ChatWindow() {
               </div>
             ))}
           </div>
-
-          {/* CTA */}
+          
           <button
             onClick={() => createConversation.mutate("New Conversation")}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-blue-500 hover:bg-blue-400 text-white text-sm font-medium shadow-lg shadow-blue-500/20"
@@ -99,7 +90,6 @@ export default function ChatWindow() {
     );
   }
 
-  /* ---------------- CHAT VIEW ---------------- */
   return (
     <div className="h-full bg-gray-950 text-white flex flex-col">
       {/* MESSAGES */}

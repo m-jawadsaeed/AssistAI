@@ -20,8 +20,6 @@ export default function ChatInput({ onSend, disabled, placeholder }: Props) {
     ta.style.height = "auto";
     ta.style.height = Math.min(ta.scrollHeight, 120) + "px";
   }, [value]);
-
-  /* ---------------- SEND ---------------- */
   const handleSend = () => {
     const trimmed = value.trim();
     if (!trimmed || disabled) return;
@@ -30,7 +28,6 @@ export default function ChatInput({ onSend, disabled, placeholder }: Props) {
     setValue("");
   };
 
-  /* ---------------- KEYBOARD ---------------- */
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -47,7 +44,6 @@ export default function ChatInput({ onSend, disabled, placeholder }: Props) {
 
   return (
     <div className="w-full space-y-2">
-      {/* SUGGESTIONS (mobile scrollable) */}
       <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
         {suggestions.map((suggestion) => (
           <button
@@ -66,8 +62,6 @@ export default function ChatInput({ onSend, disabled, placeholder }: Props) {
           </button>
         ))}
       </div>
-
-      {/* INPUT BOX */}
       <div
         className={clsx(
           "flex items-end gap-2 rounded-2xl px-3 py-2 border transition-all",
@@ -104,8 +98,6 @@ export default function ChatInput({ onSend, disabled, placeholder }: Props) {
           <Send className="w-4 h-4" />
         </button>
       </div>
-
-      {/* HINT */}
       <p className="text-[11px] text-gray-600 text-center">
         Press <span className="text-gray-400">Enter</span> to send ·{" "}
         <span className="text-gray-400">Shift + Enter</span> for new line
